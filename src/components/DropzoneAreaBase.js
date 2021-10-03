@@ -350,15 +350,8 @@ DropzoneAreaBase.defaultProps = {
     getFileAddedMessage: (fileName) => (`File ${fileName} successfully added.`),
     getPreviewIcon: defaultGetPreviewIcon,
     getFileRemovedMessage: (fileName) => (`File ${fileName} removed.`),
-    getDropRejectMessage: (rejectedFile, acceptedFiles, maxFileSize) => {
-        let message = `File ${rejectedFile.name} was rejected. `;
-        if (!acceptedFiles.includes(rejectedFile.type)) {
-            message += 'File type not supported. ';
-        }
-        if (rejectedFile.size > maxFileSize) {
-            message += 'File is too big. Size limit is ' + convertBytesToMbsOrKbs(maxFileSize) + '. ';
-        }
-        return message;
+    getDropRejectMessage: (rejectedFile) => {
+        return `File ${rejectedFile.file.name} was rejected. ${rejectedFile.errors[0].message}`;
     },
 };
 
